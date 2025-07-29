@@ -1,51 +1,35 @@
-/**
- * 1. Sizda getAddress funksiyasi bor va u taxminiy address qaytaradi. allAddresse =  ["tashkent", "xiva", "xorazm", "namangan", "andijon","qashqadaryo", "bukhara", "fergana", "jizzax", "samarkand", "navoiy", "sirdaryo", "surxondaryo"].
- * 2. Sizda borish mumkin bolgan address lar royhati xam bor allowedAddresses = [{name: "tashkent"},{name: "xiva"}, {name: "xorazm"}]
- * 3. Siz getAddress funksiyasini ishlatib undan taxminiy address olasiz
- * 4. Siz olgan yangi address borish mumkin bolgan address lar royhatida bolmasa `Borish mumkin emas bu ${address} manzilga` degan error qaytaring, aks holda `Siz ${address} manziliga borishingiz mumkin` degan message qaytaring
- *
- *
- *
- */
+// @ts-nocheck
 
-const allAddresses = [
-  "tashkent",
-  "xiva",
-  "xorazm",
-  "namangan",
-  "andijon",
-  "qashqadaryo",
-  "bukhara",
-  "fergana",
-  "jizzax",
-  "samarkand",
-  "navoiy",
-  "sirdaryo",
-  "surxondaryo",
-];
-function getAddress() {
-  const idx = Math.floor(Math.random() * allAddresses.length);
-  const address = allAddresses[idx];
+// Challenge - 1
+function createCar(
+  brand: string,
+  model: string,
+  year: number,
+  color: string,
+  price: number
+) {
+  const person = Object.create(methods);
 
-  return address;
-}
-const allowedAddresses = [
-  { name: "tashkent" },
-  { name: "xiva" },
-  { name: "xorazm" },
-];
-
-function go() {
-  try {
-    const address = getAddress();
-    const isAllowed = allowedAddresses.some((a) => a.name === address);
-
-    if (isAllowed) return `Siz ${address} manziliga borishingiz mumkin`;
-
-    throw new Error(`Borish mumkin emas bu ${address} manzilga`);
-  } catch (error: any) {
-    if (error instanceof Error) return error.message;
-  }
+  person.brand = brand;
+  person.model = model;
+  person.year = year;
+  person.color = color;
+  person.price = price;
 }
 
-console.log(go());
+const methods = {
+  start() {
+    console.log(`${this.brand} ${this.model} is starting`);
+  },
+  stop() {
+    console.log(`${this.brand} ${this.model} is stoping`);
+  },
+};
+
+const person = createCar("Toyota", "Camry", 2020, "Blue", 24000);
+const person2 = createCar("Honda", "Civic", 2019, "Red", 22000);
+
+person.start();
+person2.start();
+person.stop();
+person2.stop();
